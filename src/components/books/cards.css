@@ -1,0 +1,211 @@
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cards-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 230px;
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 2px solid #9f9f9f;
+}
+
+.card-add, .card-delete, .card-delete-book {
+    position: absolute;
+    font-size: 50px;
+    color: #9f9f9f;
+    text-align: right;
+    margin-top: 34px;
+    margin-left: 200px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    border: 2px solid rgb(159, 159, 159);
+}
+
+.card-delete-book {
+    margin-top: 0;
+    border: none;
+}
+
+.card:hover {
+    border: 2px solid #240376;
+}
+
+.card:hover .card-add, .card-delete {
+    border: 2px solid #240376;
+    background-color: #240376;
+    color: #d3d2d2;
+}
+
+.card-img-box{
+    width: 230px;
+    height: 284px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.card-img {
+    width: 100%;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+.card-avtor {
+    color: #240376;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.card-title {
+    width: 200px;
+}
+
+.book {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    column-gap: 20px;
+    border-bottom: #9f9f9f;
+}
+
+.book-img-box{
+    width: 250px;
+    height: 400px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.book-img {
+    width: 100%;
+}
+
+.book-details {
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    text-indent: 2em;
+    text-align: justify;
+    row-gap: 0.2em;
+}
+
+.book-edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-indent:0;  
+    column-gap: 1em;
+}
+
+.book-icons-box {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    column-gap: 1em;
+}
+
+.book-title {
+    color: #240376;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: underline;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.book-icons-box {
+    display: flex;
+    justify-content: center;
+}
+
+.book-icons {
+    color: #240376;
+    font-size: 16px;
+    padding: 0;
+}
+
+.book-input{
+    width: 100%;
+}
+
+.book-edit-title {
+  color: #240376;
+  text-align: center;
+  font-size: 26px;
+}
+
+.book-avthor{
+    color: #240376;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.book-block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-indent: 0;
+    column-gap: 2em;
+}
+
+.book-add-user{
+    display: flex;
+    column-gap: 1em;
+    color: #240376;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.book-users-box {
+    padding: 2em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #240376;
+    font-size: 1.2em;
+}
+
+.book-user-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #240376;
+    overflow: hidden;
+}
+
+.image-user {
+    width: 100%;
+}
+
+@media screen and (max-width: 565px){
+    .book {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-edit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

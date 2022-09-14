@@ -1,0 +1,66 @@
+.create {
+    padding: 10% 20%;
+    background-color: #91919180;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.create-box {
+    padding-top: 2em;
+    box-shadow: 2px 4px 4px #91919180;
+}
+.create-appbar{
+    padding: 0;
+    margin: 0;
+}
+.create-tab{
+    background-color: #240376;
+    color: #ffffff;
+}
+.create-form {
+    width: 100%;
+    padding: 10%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    box-shadow: 2px 4px 4px #91919180;
+    row-gap: 10px;
+    text-align: center;
+}
+
+.create-title-form {
+    text-align: center;
+    font-size: 3em;
+    color: #240376;
+    font-weight: bold;
+}
+.create-form-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+    padding: 20px 10px;
+}
+.create-link {
+    color: #000;
+}
+
+@media screen and (max-width: 565px){
+    .create {
+        padding: 5%;
+        background-color: #ffffff;
+    }
+
+    .create-title-form{
+        font-size: 2em;
+    }
+    .create-form-buttons {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        padding: 10px 4px;
+    }
+}

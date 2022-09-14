@@ -1,0 +1,122 @@
+.avtors {
+    padding-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.avtors-card {
+    height: 350px;
+    width: 250px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.avtors-img-box {
+    width: 250px;
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+.avtors-name{
+    text-align: center;
+    font-size: 1em;
+    color: #240376;
+}
+
+.avtors-img-load {
+    width: 100%;
+    color: #240376;
+}
+
+.avtor {
+    padding-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.avtor-name {
+    color: #240376;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.avtor-img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.avtor-details{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.avtor-edit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 2em;
+}
+
+.avtor-edit-title{
+    color: #240376;
+    text-align: center;
+    font-size: 2em;
+    column-gap: 2em;
+}
+
+.avtor-discribe{
+    font-size: 1em;
+    text-indent: 2em;
+    text-align: justify;
+}
+
+.avtor-books{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.avtor-img{
+    width: 230px;
+    height: 284px;
+    overflow: hidden;
+}
+
+.avtor-book-name {
+    color: #240376;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: bold;
+}
+
+.avtor-icons{
+    font-size: 50px;
+    color: #240376;
+    cursor: 'pointer'
+}
+
+@media screen and (max-width: 565px) {
+    .avtors {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    .avtor {
+        width: 100%;
+        flex-direction: column;
+        align-content: center;
+    
+    }
+}

@@ -1,0 +1,41 @@
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 44px;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  background: #ffffff;
+  border: 2px solid #000;
+  box-shadow: 24px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+
+.modal::-webkit-scrollbar{
+  display: none;
+}
+
+.modal-button{
+  width: 24px;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+@media screen and (max-width: 865px){
+  .modal {
+    height: 420px;
+    width: 80%;
+    padding: 20px;    
+  }
+}
+
+@media screen and (max-width: 465px){
+  .modal {
+    width: 90%;
+  }
+}

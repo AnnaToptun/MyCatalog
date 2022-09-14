@@ -1,0 +1,28 @@
+.home-aside{
+    padding-top: 50px;
+    display: flex;
+    justify-content: flex-start;
+    box-shadow: 0 16px 10px -16px #000;
+}
+
+.home-tabs{
+    width: 250px;
+    flex-shrink: 0; 
+}
+
+.home-tab-item {
+  background: #ae5e0b;
+  color: #fff;
+}
+
+@media screen and (max-width: 565px) {
+    .home-aside{
+        display: 'flex';
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .home-tabs{
+        width: 80%;
+    }
+}
