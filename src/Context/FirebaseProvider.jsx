@@ -1,8 +1,25 @@
-import {React, createContext} from 'react'
+import { React, createContext, useEffect, useState, useContext } from "react";
+import {CardsUserContext} from './CardsUserProvider';
+import { db } from '../firebase/firebase-config'
+import { addDoc, getDocs, updateDoc, doc, deleteDoc } from 'firebase/firestore'
 
 const FirebaseContext = createContext()
 
-export const FirebaseProvider = () => {
+export const FirebaseProvider = ({children}) => {
+    const {
+      setBooks,
+      setAvtors,
+      setUsers,
+      setGenres,
+      booksCollectionRef,
+      genresCollectionRef,
+      avtorsCollectionRef,
+      usersCollectionRef,
+    } = useContext(CardsUserContext);
+    const [userCurrent, setUserCurrent] = useState({});
+    const [userIdBooks, setUserIdBooks] = useState([]);
+    const [usersAddBook, setUsersAddBook] = useState([]);  
+    
      const getBookCards = async () => {
        const dataBooks = await getDocs(booksCollectionRef);
        const allBook = dataBooks.docs.map((doc) => ({
@@ -41,8 +58,47 @@ export const FirebaseProvider = () => {
          id: doc.id,
        }));
        setGenres(allGenres.sort((prev, next) => prev.genre < next.genre && -1));
-     };
-  return (
-    <div>FirebaseProvider</div>
-  )
+    };
+    
+    const addCollection = async (collections, field) => {
+      await addDoc(collections, field);
+    };
+
+    const updateArrays = async (collections, id, newField) => {
+      const bookDoc = doc(db, collections, id);
+      await updateDoc(bookDoc, newField);
+    };
+    const deleteBookUser = async (id, collection) => {
+      const userDoc = doc(db, collection, id);
+      const deleteBook = await deleteDoc(userDoc);
+      console.log(typeof deleteBook);
+    };
+    useEffect(() => {
+      getUsers();
+      getBookCards();
+      getGenres();
+      getAvtors();
+    }, [usersAddBook]);
+    
+    return (
+      <FirebaseContext.Provider
+        value={
+          (userCurrent,
+            userIdBooks,
+                    usersAddBook,
+                    setUsersAddBook,
+          setUserCurrent,
+          setUserIdBooks,
+          getUsers,
+          getBookCards,
+          getGenres,
+          getAvtors,
+          addCollection,
+          updateArrays,
+          deleteBookUser)
+        }
+      >
+        {children}
+      </FirebaseContext.Provider>
+    );
 }

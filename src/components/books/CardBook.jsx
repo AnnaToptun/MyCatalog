@@ -7,10 +7,12 @@ import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import './cards.css'
+import {BookUserContext} from '../../Context/BookUserProvider'
 
-export function CardBook ({card, deleteBook, delBookUser, addBook  }) {
+export function CardBook ({card }) {
     const { user, userIdBooks, setBookId, avtors,  setCommentIdBooks, setUsersAddBook, setAvtorId, addBooksAvtor, userCurrent } = useContext(CardsUserContext)
-       
+    
+    const { deleteBook, addBook, delBookUser } = useContext(BookUserContext);
     const route = useHistory()
 
     const detailsCard =()=>{

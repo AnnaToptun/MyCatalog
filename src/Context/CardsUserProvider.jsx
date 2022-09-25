@@ -4,6 +4,7 @@ import { collection, addDoc, getDocs, updateDoc, doc, deleteDoc,} from 'firebase
 import { onAuthStateChanged } from 'firebase/auth'
 import { useHistory } from 'react-router-dom'
 import {NotificationProvider} from "./NotificationProvider";
+import {FirebaseProvider} from "./FirebaseProvider";
 
 
 export const CardsUserContext = createContext({})
@@ -143,8 +144,8 @@ export const CardsUserProvider = ({children}) => {
     }
 
     useEffect(() => {
-      getUsers();
       monitorAuthState();
+      getUsers();
       getBookCards();
       getGenres();
       getAvtors();
@@ -194,8 +195,11 @@ export const CardsUserProvider = ({children}) => {
         usersCollectionRef,
         updateArrays,
       }}
-    >
-      <NotificationProvider>{children}</NotificationProvider>
+        >
+        <FirebaseProvider>
+                
+        <NotificationProvider>{children}</NotificationProvider>
+    </FirebaseProvider>
     </CardsUserContext.Provider>
   );
 };

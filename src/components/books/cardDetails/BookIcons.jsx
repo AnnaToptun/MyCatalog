@@ -21,16 +21,9 @@ export const BookIcons = () => {
     };
     
     const readBuy = (url) => {
-        console.log(url);
         window.open(`${url}`);
     };
-    const bookIdUsers = () => {
-        if (usersAddBook.length) {
-            
-        }
-    }; 
-    console.log("bookId", bookId);
-    console.log("bookIdUsers", bookIdUsers);
+   
     return (
       <Box className="book-block">
         <Buttons onClick={back}>Назад</Buttons>

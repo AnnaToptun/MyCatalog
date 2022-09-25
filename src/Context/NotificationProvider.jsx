@@ -25,8 +25,27 @@ export const NotificationProvider = ({ children }) => {
     }
   };
 
+    const notificationAddBook = (card) => {
+      createNotification(
+        "success",
+        `Ви успішно додали книгу ${card.title} до свого каталогу`
+      );
+    }
+    const notificationDeleteBook = (card) => {
+        createNotification(
+            "warning",
+            `Ви видалили книгу ${card.title} зі свого каталогу`
+        );
+    };
+    
   return (
-    <NotificationContext.Provider value={{ createNotification }}>
+    <NotificationContext.Provider
+      value={{
+        createNotification,
+        notificationAddBook,
+        notificationDeleteBook,
+      }}
+    >
       {children}
       <NotificationContainer />
     </NotificationContext.Provider>

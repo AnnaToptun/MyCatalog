@@ -9,7 +9,6 @@ export const BookUserProvider = ({children}) => {
     const {
       books,
       userCurrent,
-      addBookUser,
       userIdBooks,
       setUsersAddBook,
       setBooksSort,
@@ -17,9 +16,13 @@ export const BookUserProvider = ({children}) => {
       deleteBookUser,
       deleteBookOrUser,
       updateListUsers,
-      addBookIdUser,
+      setUserIdBooks,
+      updateArrays,
+      usersAddBook,
+      bookId,
     } = useContext(CardsUserContext);
-    const {createNotification} = useContext(NotificationContext)
+    const { notificationDeleteBook, notificationAddBook } =
+      useContext(NotificationContext);
     const [sortBooks, setSortBooks] = useState([]);
     
     const usersBooks = books.filter((book) => {
@@ -37,51 +40,55 @@ export const BookUserProvider = ({children}) => {
     };
 
     const delBookUser = async (card) => {
-      const addUsers = card.addUsers;
-      const field = addUsers.filter((user) => {
-        if (user !== userCurrent.id) {
-          return user;
-        }
-      });
-      updateListUsers(card.id, field);
-      deleteBookUser(userCurrent.id, userCurrent.userBooks, card.id);
-      setUsersAddBook(field);
-      createNotification(
-        "warning",
-        `Ви видалили книгу ${card.title} зі свого каталогу`
-      );
+        const addUsers = card.addUsers;
+        const field = addUsers.filter((user) => {
+            if (user !== userCurrent.id) {
+            return user;
+            }
+        });
+        updateListUsers(card.id, field);
+        deleteBookUser(userCurrent.id, userCurrent.userBooks, card.id);
+        setUsersAddBook(field);
+        notificationDeleteBook(card);
     };
 
-    const addBook =  (card) => {
-      const addUsers = card.addUsers;
-      addBookUser(userCurrent.id, userCurrent.userBooks, card.id);
-      addBookIdUser(card.id, card.addUsers, userCurrent.id);
-      addUsers.includes(userCurrent.id)
-        ? setUsersAddBook(addUsers)
-        : setUsersAddBook([...addUsers, userCurrent.id]);
-
-      createNotification(
-        "success",
-        `Ви успішно додали книгу ${card.title} до свого каталогу`
-      );
+    const addBookIdUser = (card) => {
+        userIdBooks.includes(card.id)
+            ? setUserIdBooks([...userIdBooks])
+            : setUserIdBooks([...userIdBooks, card.id]);
+        const updateUser = { userBooks: [...userIdBooks, card.id] };
+        updateArrays("Users", userCurrent.id, updateUser);
     };
 
+    const addUserIdBook = () => {
+       const arrayUsers = [...usersAddBook, userCurrent.id];
+       const updateBook = { addUsers: arrayUsers };
+       updateArrays("Books", bookId.id, updateBook);
+       setUsersAddBook(arrayUsers);
+    };
     
-    const deleteBook = (id) => {
-      deleteBookOrUser(id, "Books");
-      setBooksSort(booksSort.filter((book) => book.id !== id));
+    const addBook =  (card) => {
+        addBookIdUser(card);
+        addUserIdBook()
+        notificationAddBook(card);
     };
-  return (
-    <BookUserContext.Provider
-      value={{
-        sortBooksGenre,
-        deleteBook,
-        addBook,
-        delBookUser,
-        usersBooks,
-      }}
-    >
-      {children}
-    </BookUserContext.Provider>
-  );
+
+    const deleteBook = (id) => {
+        deleteBookOrUser(id, "Books");
+        setBooksSort(booksSort.filter((book) => book.id !== id));
+    };
+
+    return (
+        <BookUserContext.Provider
+            value={{
+                sortBooksGenre,
+                deleteBook,
+                addBook,
+                delBookUser,
+                usersBooks,
+            }}
+            >
+            {children}
+        </BookUserContext.Provider>
+    );
 }
