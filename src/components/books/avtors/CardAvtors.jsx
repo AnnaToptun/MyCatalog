@@ -48,7 +48,7 @@ export const CardAvtors = () => {
                 <Box className="avtor-edit">
                     <h1 className="avtor-name ">{avtorId.avtor}</h1>
                     <Box>
-                        {user ? userCurrent.status === "admin" ? <EditAvtor /> : "" : ""}
+                        {user ? (userCurrent.status==="superadmin"||userCurrent.status==="admin" )? <EditAvtor /> : "" : ""}
                     </Box>
                 </Box>
                 <p className="avtor-discribe">{avtorId.discribe}</p>

@@ -1,0 +1,28 @@
+.users {
+    padding: 50px 0 0 50px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.users-card {
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.users-img-box {
+    width: 100px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+.users-name{
+    text-align: center;
+    font-size: 1em;
+    color: #240376;
+}
+

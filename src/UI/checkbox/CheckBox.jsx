@@ -4,7 +4,6 @@ import React from 'react'
 
 
 export function MyCheckBox ({label, ...props}) {
-  console.log(label)
   return (
     <Box>
       <FormControlLabel

@@ -14,12 +14,12 @@ export function UserAllBook() {
                 <Box className="user" p={0} m={0}>
                 {usersBooks.map((card) => (
                     <Box key={card.id} my={2} mx={2}>
-                    <CardBook card={card}/>
+                        <CardBook card={card}/>
                     </Box>
                 ))}
                 </Box>
             ) : (
-                <p сlassName="user-nocards">Ще не додано жодної книги</p>
+                <Box className="user-nocards">Ще не додано жодної книги</Box>
             )}
         </Container>
     );

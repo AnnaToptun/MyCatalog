@@ -12,7 +12,6 @@ export const AllCards = createContext()
 function App() {
   const [time, setTime]= useState(false)
   setTimeout(() => {
-    console.log("Delayed for 1 second.");
     setTime(true)
   }, 1000)
 

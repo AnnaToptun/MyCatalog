@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useState, useContext } from 'react';
 import { Tabs, Box } from '@mui/material'
@@ -12,11 +11,12 @@ import { UserAllBook } from '../UserAllBook';
 import { AsideTab } from '../../../UI/Tab/AsideTab';
 import { TabPanel } from './TabPanel';
 import './userHome.css'
+import {AllUsers} from '../../users/AllUsers';
 
 
 export const AsideUser = () => {
     const { userIdBooks } = useContext(CardsUserContext);
-    const { avtors, genres, books } = useContext(StateParamsContext)
+    const { avtors, genres, books, users} = useContext(StateParamsContext)
     const { usersBooks } = useContext(BookUserContext);
     
     const [value, setValue] = React.useState(0)
@@ -34,7 +34,6 @@ export const AsideUser = () => {
             })
         )
     }
-    
     return (
         <Box className="home-aside">
             <Tabs
@@ -46,15 +45,15 @@ export const AsideUser = () => {
                 textColor="inherit"
                 className="home-tabs">
                 
-                <AsideTab label={`Всі книги (${books.length})`} />
+                <AsideTab label={`Книги (${books.length})`} />
+                <AsideTab label={`Користувачі (${users.length})`} />
                 <AsideTab label={`Автори (${avtors.length})`} />
                 <AsideTab label={`Мої книги (${userIdBooks.length})`} />
                 {genres.map((g) => (
-                    
                     <AsideTab
-                    key={g.id}
-                    label={g.genre}
-                    onClick={() => sortBooksGenre(g.genre)}
+                        key={g.id}
+                        label={g.genre}
+                        onClick={() => sortBooksGenre(g.genre)}
                     />
                 ))}
             </Tabs>
@@ -62,18 +61,22 @@ export const AsideUser = () => {
                 <AllCard />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <AllAvtors />
+                <AllUsers />
             </TabPanel>
             <TabPanel value={value} index={2}>
+                <AllAvtors />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
                 <UserAllBook />
             </TabPanel>        
-            {genres.map((g, index) => (
-                <TabPanel value={value} key={g.id} index={index + 3}>
+           {genres.map((g, index) => (
+                <TabPanel value={value} key={g.id} index={index + 4}>
                     <SortedArray
                         books={sortBooks}
                     />
                 </TabPanel>
             ))}
+ 
         </Box>
     );
 }

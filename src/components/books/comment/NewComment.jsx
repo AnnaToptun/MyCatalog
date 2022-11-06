@@ -52,7 +52,7 @@ export const NewComment = ({comment, bookId}) => {
             <Box>
                 {
                     (user)
-                        ?(userCurrent.status==="admin" || userCurrent.id === comment.userId)
+                        ?(userCurrent.status==="superadmin"||userCurrent.status==="admin"|| userCurrent.id === comment.userId)
                             ? <EditComment comment={comment} bookId={bookId}/>
                             :''
                         :''

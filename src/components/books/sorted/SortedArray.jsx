@@ -1,10 +1,9 @@
-import React from 'react';
+import {React}from 'react';
 import { Box } from '@material-ui/core';
 import { CardBook } from '../CardBook';
 import './sorted.css'
 
 export const SortedArray = ({books}) => {
-    
     return (
         <Box className='sorted'>
             {
@@ -19,7 +18,7 @@ export const SortedArray = ({books}) => {
                             ))
                         }
                     </Box>
-                :   <Box className="sorted-nocards"><p>Ще не додано жодної книги з цього жанру</p> </Box>
+                :   <Box className="sorted-nocards"><p></p> Ще не додано жодної книги з цього жанру</Box>
             }
         </Box>
     )

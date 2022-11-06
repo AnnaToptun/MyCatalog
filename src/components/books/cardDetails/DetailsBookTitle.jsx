@@ -17,7 +17,7 @@ export const DetailsBookTitle = () => {
         <Box className="book-edit">
             <span className="book-title">{bookId.title}</span>
             <Box className="book-icons-box">
-                {user ? userCurrent.status === "admin" ? <EditBook /> : "" : ""}
+                {user ? (userCurrent.status==="superadmin"||userCurrent.status==="admin")? <EditBook /> : "" : ""}
                 {user
                     ? (<Box>
                                 {

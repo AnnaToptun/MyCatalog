@@ -66,7 +66,6 @@ export const CardsUserProvider = ({children}) => {
  
     const updateArrays = async (collections, id, newField) => {
         const bookDoc = doc(db, collections, id);
-        console.log(newField)
         await updateDoc(bookDoc, newField);
     };
     

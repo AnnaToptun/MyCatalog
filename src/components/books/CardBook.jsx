@@ -35,53 +35,53 @@ export function CardBook ({card }) {
     } 
   
     return (
-      <Card className="card">
-        {user ? (
-          <Box>
-            {userCurrent.status === "admin" ? (
-              <Box>
-                <CloseOutlinedIcon
-                  className="card-delete-book"
-                  sx={{ fontSize: "50px" }}
-                  onClick={() => deleteBook(card.id)}
-                />
-              </Box>
-            ) : (
-              ""
-            )}
-          </Box>
-        ) : (
-          ""
-        )}
-        <Box className="card-img-box" onClick={() => detailsCard(card)}>
-          {card.img ? (
-            <img src={card.img} className="card-img" alt="" />
-          ) : (
-            <BookOutlinedIcon />
-          )}
-        </Box>
-        <Box className="card-info">
-          <span className="card-title">Назва: {card.title}</span>
-          <span>
-            Автор:
-            <a className="card-avtor" onClick={detailsAvtor}>
-              {card.avtor}
-            </a>
-          </span>
-          {!userIdBooks.includes(card.id) ? (
-            <AddOutlinedIcon
-              className="card-add"
-              sx={{ fontSize: "50px" }}
-              onClick={()=>addBook(card)}
-            />
-          ) : (
-            <RemoveOutlinedIcon
-              className="card-delete"
-              sx={{ fontSize: "50px" }}
-              onClick={()=>delBookUser(card)}
-            />
-          )}
-        </Box>
-      </Card>
+        <Card className="card">
+            {user ? (
+                <Box>
+                    {userCurrent.status === "admin" ? (
+                    <Box>
+                        <CloseOutlinedIcon
+                        className="card-delete-book"
+                        sx={{ fontSize: "50px" }}
+                        onClick={() => deleteBook(card.id)}
+                        />
+                    </Box>
+                    ) : (
+                    ""
+                    )}
+                </Box>
+                ) : (
+                ""
+                )}
+                <Box className="card-img-box" onClick={() => detailsCard(card)}>
+                    {card.img ? (
+                        <img src={card.img} className="card-img" alt="" />
+                    ) : (
+                        <BookOutlinedIcon />
+                    )}
+                </Box>
+            <Box className="card-info">
+                <span className="card-title">Назва: {card.title}</span>
+                <span>
+                    Автор:
+                    <a className="card-avtor" onClick={detailsAvtor}>
+                    {card.avtor}
+                    </a>
+                </span>
+                {!userIdBooks.includes(card.id) ? (
+                    <AddOutlinedIcon
+                    className="card-add"
+                    sx={{ fontSize: "50px" }}
+                    onClick={()=>addBook(card)}
+                    />
+                ) : (
+                    <RemoveOutlinedIcon
+                    className="card-delete"
+                    sx={{ fontSize: "50px" }}
+                    onClick={()=>delBookUser(card)}
+                    />
+                )}
+            </Box>
+        </Card>
     );
 }
