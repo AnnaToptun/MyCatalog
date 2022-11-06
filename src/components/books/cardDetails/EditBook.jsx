@@ -3,6 +3,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import {FormGroup, MenuItem} from "@mui/material";
 import { Buttons } from "../../../UI/button/Buttons";
 import { CardsUserContext } from "../../../Context/CardsUserProvider";
+import { StateParamsContext } from "../../../Context/StateParamsProvider";
 import { MyInput } from "../../../UI/input/MyInput";
 import { MyModal } from "../../../UI/modal/myModal";
 import { MySelect } from "../../../UI/select/MySelect";
@@ -10,15 +11,8 @@ import { TextArea } from "../../../UI/textArea/TextArea";
 import "./book.css";
 
 export const EditBook = () => {
-    const {
-        editCardUser,
-        genres,
-        avtors,
-        booksSort,
-        setBooksSort,
-        bookId,
-        setBookId,
-    } = useContext(CardsUserContext);
+    const { bookId, setBookId, updateArrays } = useContext(CardsUserContext);
+    const { genres, booksSort, setBooksSort } = useContext(StateParamsContext)
 
     const [newFieldBook, setNewFieldBook] = useState({
         title: bookId.title,
@@ -33,15 +27,15 @@ export const EditBook = () => {
     const updateBook = async () => {
         setBookId({ ...bookId, ...newFieldBook });
         setBooksSort(
-        booksSort.map((book) => {
-            if (book.id === bookId.id) {
-            return { ...book, ...newFieldBook };
-            } else {
-            return book;
-            }
-        })
+            booksSort.map((book) => {
+                if (book.id === bookId.id) {
+                return { ...book, ...newFieldBook };
+                } else {
+                return book;
+                }
+            })
         );
-        editCardUser(bookId.id, "Books", newFieldBook);
+        updateArrays("Books", bookId.id, { ...newFieldBook }); 
     };
     
     const titleHandler = (value) => {

@@ -5,11 +5,12 @@ import { CardsUserContext } from "../../../Context/CardsUserProvider";
 import { MyModal } from "../../../UI/modal/myModal";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import "./book.css";
+import {StateParamsContext} from "../../../Context/StateParamsProvider";
 
 export const BookLikes = () => {
-    const { users, setUserId, usersAddBook, bookId } =
-        useContext(CardsUserContext);
-
+    const { setUserId, usersAddBook, bookId } = useContext(CardsUserContext);
+    const {users} = useContext(StateParamsContext)
+    
     const addUsers = bookId.addUsers;
 
     const detailsUser = (card) => {
@@ -22,12 +23,7 @@ export const BookLikes = () => {
         }
     });
 
-    const startUsers = users.filter((user) => {
-        if (addUsers.includes(user.id)) {
-            return user;
-        }
-    });
-
+ 
     return (
         <MyModal title={<ThumbUpOutlinedIcon className="book-icons" />}>
         <h3 className="book-edit-title">Сподобалась книга</h3>

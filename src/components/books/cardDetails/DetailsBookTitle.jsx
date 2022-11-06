@@ -6,12 +6,12 @@ import { BookUserContext } from "../../../Context/BookUserProvider";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import "./book.css";
+import {StateParamsContext} from "../../../Context/StateParamsProvider";
 
 export const DetailsBookTitle = () => {
-    const { user,  userCurrent, userIdBooks, bookId} =
-        useContext(CardsUserContext);
+    const { userIdBooks, bookId} = useContext(CardsUserContext);
     const { addBook, delBookUser } = useContext(BookUserContext);
-
+    const { user, userCurrent } = useContext(StateParamsContext)
 
     return (
         <Box className="book-edit">

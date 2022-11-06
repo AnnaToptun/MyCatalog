@@ -9,12 +9,7 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import "./comment.css";
 
 export const EditComment = ({ comment, bookId }) => {
-    const {
-      commentIdBooks,
-      setCommentIdBooks,
-      updateArrays,
-    } = useContext(CardsUserContext);
-
+    const { commentIdBooks, setCommentIdBooks, updateArrays } = useContext(CardsUserContext);
     
     const [editComment, setEditComment] = useState(comment.comment);
 

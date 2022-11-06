@@ -1,26 +1,28 @@
-import { Box, FormGroup, TextField } from '@mui/material'
+import { FormGroup, TextField } from '@mui/material'
 import { React,  useContext, useState } from 'react'
 import { CardsUserContext } from '../../../Context/CardsUserProvider'
 import { Buttons } from '../../../UI/button/Buttons'
-import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
+import {StateParamsContext} from '../../../Context/StateParamsProvider';
 
 export const FormComment = ({bookCurrent}) => {
-    const {commentIdBooks, setCommentIdBooks, userCurrent, addBookComment} = useContext(CardsUserContext)
+    const {commentIdBooks, setCommentIdBooks,  updateArrays} = useContext(CardsUserContext)
+    const {userCurrent} = useContext(StateParamsContext)
     
     const [comment, setComment] = useState({
-        id: Date.now(),
         userId: userCurrent.id,
         comment: ''
     })
 
     const newComment = (value)=>{
-        setComment({...comment, comment: value })
+        setComment({...comment, comment: value, id: Date.now(), })
     }
 
     const createCommentBook = ()=>{
-        setCommentIdBooks([...commentIdBooks, ...bookCurrent.comments])
+        setCommentIdBooks([...commentIdBooks, {...comment }])
+        console.log({...comment})
+        const allComments = [...commentIdBooks, {...comment}]
+        updateArrays('Books', bookCurrent.id, {comments: allComments})
         setComment({...comment, comment: ''})
-        addBookComment(bookCurrent.id, bookCurrent.comments, comment)
     }
  
     return (
@@ -32,9 +34,6 @@ export const FormComment = ({bookCurrent}) => {
                 onChange={(e)=>newComment(e.target.value)}
                 className='text-field'
             />
-            <Box className='form-smile'>
-                <InsertEmoticonIcon />
-            </Box>
             <Buttons onClick={createCommentBook}>Create Comment</Buttons>        
         </FormGroup>
     )

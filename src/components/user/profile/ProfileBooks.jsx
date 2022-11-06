@@ -3,15 +3,12 @@ import { useHistory } from "react-router-dom";
 import { CardsUserContext } from "../../../Context/CardsUserProvider";
 import { Box, Card } from "@mui/material";
 import "./profile.css";
+import {StateParamsContext} from "../../../Context/StateParamsProvider";
 
 export const ProfileBooks = () => {
-    const {
-        setBookId,
-        setCommentIdBooks,
-        books,
-        userIdBooks,
-    } = useContext(CardsUserContext);
-
+    const { setBookId, setCommentIdBooks, userIdBooks } = useContext(CardsUserContext);
+    const {books} = useContext(StateParamsContext)
+    
     const usersBooks = books.filter((book) => {
         if (userIdBooks.includes(book.id)) {
             return book;

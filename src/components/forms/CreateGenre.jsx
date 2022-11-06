@@ -2,13 +2,16 @@ import { Box, FormGroup } from '@mui/material'
 import { React, useContext, useState } from 'react'
 import { CardsUserContext } from '../../Context/CardsUserProvider'
 import {NotificationContext} from '../../Context/NotificationProvider'
+import {StateParamsContext} from '../../Context/StateParamsProvider'
 import { Buttons } from '../../UI/button/Buttons'
 import { MyInput } from '../../UI/input/MyInput'
 import "./create.css";
 
 export const CreateGenre = () => {
-    const { setGenres, genres, addCollection, genresCollectionRef } = useContext(CardsUserContext);
+    const { addCollection, genresCollectionRef} = useContext(CardsUserContext);
+    const { setGenres, genres } = useContext(StateParamsContext)
     const { createNotification } = useContext(NotificationContext);
+    
     const [genre, setGenre] = useState({
         genre: ''
     })

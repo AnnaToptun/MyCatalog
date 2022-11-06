@@ -1,25 +1,27 @@
-import { React, useContext, useState } from 'react'
+import { React, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Box } from '@mui/material'
 import { CardsUserContext } from '../../../Context/CardsUserProvider'
 import { EditComment } from './EditComment'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './comment.css'
+import {StateParamsContext} from '../../../Context/StateParamsProvider'
 
 export const NewComment = ({comment, bookId}) => {
-  const {userCurrent,users,setUserId, user } = useContext(CardsUserContext)
+    const { setUserId} = useContext(CardsUserContext)
+    const {userCurrent, users, user } = useContext(StateParamsContext)
+        
+    const userComment = users.filter(user => {
+        if(user.id ===comment.userId){
+            return user
+        }
+    })
 
-  const userComment = users.filter(user => {
-    if(user.id ===comment.userId){
-        return user
+    const userId = userComment[0]
+
+    const detailsUser = ()=>{
+        setUserId(userId)
     }
-  })
-
-  const userId = userComment[0]
-
-  const detailsUser = ()=>{
-    setUserId(userId)
-  }
 
     return (
         <Box className='comments'>

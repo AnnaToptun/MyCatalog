@@ -1,14 +1,15 @@
 import { Box } from '@mui/material'
 import { React, useContext} from 'react'
-import { CardsUserContext } from '../../Context/CardsUserProvider'
 import { CardBook } from './CardBook'
 import { SortedBook } from './sorted/SortedBook';
 import { Pagination } from '../pagination/Pagination';
 import './cards.css'
 import {PaginationProvider} from '../../Context/PaginationProvider';
+import {StateParamsContext} from '../../Context/StateParamsProvider';
 
 export const AllCard = () => {
-    const {booksSort} = useContext(CardsUserContext)
+    const {booksSort} = useContext(StateParamsContext)
+    
     return (
         <Box className='cards-box'>
             <PaginationProvider>

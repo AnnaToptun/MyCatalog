@@ -1,54 +1,39 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import {createContext} from 'react';
+import {db} from '../firebase/firebase-config';
 import {CardsUserContext} from './CardsUserProvider';
 import {NotificationContext} from './NotificationProvider';
-
+import {StateParamsContext} from './StateParamsProvider';
+import { doc, deleteDoc} from 'firebase/firestore'
 export const BookUserContext = createContext()
 
 export const BookUserProvider = ({children}) => {
-    const {
-      books,
-      userCurrent,
-      userIdBooks,
-      setUsersAddBook,
-      setBooksSort,
-      booksSort,
-      deleteBookUser,
-      deleteBookOrUser,
-      updateListUsers,
-      setUserIdBooks,
-      updateArrays,
-      usersAddBook,
-      bookId,
-    } = useContext(CardsUserContext);
-    const { notificationDeleteBook, notificationAddBook } =
-      useContext(NotificationContext);
-    const [sortBooks, setSortBooks] = useState([]);
+    const { userIdBooks, setUsersAddBook, setUserIdBooks, updateArrays, usersAddBook, bookId } = useContext(CardsUserContext);
+    const { books,userCurrent,setBooksSort,booksSort } = useContext(StateParamsContext)
     
-    const usersBooks = books.filter((book) => {
-      if (userIdBooks.includes(book.id)) {
-        return book;
-      }
-    });
+    const { notificationDeleteBook, notificationAddBook } = useContext(NotificationContext);
+    
+    const usersBooks = books.filter((book) => userIdBooks.includes(book.id));
 
-    const sortBooksGenre = (sort) => {
-      setSortBooks(
-        usersBooks.filter((book) => {
-          return book.genre.includes(sort);
-        })
-      );
+    const delBookIdUser = (card) => {
+        const arrayBooks = userCurrent.userBooks;
+        const field = arrayBooks.filter((book) => book !== card.id);
+        const updateUser = { userBooks: [...field] };
+        updateArrays("Users", userCurrent.id, updateUser);
+        setUserIdBooks([...field]); 
     };
-
-    const delBookUser = async (card) => {
+    
+    const delUserIdBook = (card) => {
         const addUsers = card.addUsers;
-        const field = addUsers.filter((user) => {
-            if (user !== userCurrent.id) {
-            return user;
-            }
-        });
-        updateListUsers(card.id, field);
-        deleteBookUser(userCurrent.id, userCurrent.userBooks, card.id);
-        setUsersAddBook(field);
+        const arrayUsers = addUsers.filter((user) => (user !== userCurrent.id));
+        const updateBook = { addUsers: arrayUsers };
+        updateArrays("Books", card.id, updateBook);
+        setUsersAddBook(arrayUsers)
+    }
+
+    const delBookUser = (card) => {
+        delBookIdUser(card);
+        delUserIdBook(card);
         notificationDeleteBook(card);
     };
 
@@ -60,28 +45,28 @@ export const BookUserProvider = ({children}) => {
         updateArrays("Users", userCurrent.id, updateUser);
     };
 
-    const addUserIdBook = () => {
+    const addUserIdBook = (card) => {
        const arrayUsers = [...usersAddBook, userCurrent.id];
        const updateBook = { addUsers: arrayUsers };
-       updateArrays("Books", bookId.id, updateBook);
+       updateArrays("Books", card.id, updateBook);
        setUsersAddBook(arrayUsers);
     };
     
     const addBook =  (card) => {
         addBookIdUser(card);
-        addUserIdBook()
+        addUserIdBook(card)
         notificationAddBook(card);
     };
 
-    const deleteBook = (id) => {
-        deleteBookOrUser(id, "Books");
+    const deleteBook = async(id) => {
+        const userDoc = doc(db, 'Books', id)
+        await deleteDoc(userDoc)
         setBooksSort(booksSort.filter((book) => book.id !== id));
     };
 
     return (
         <BookUserContext.Provider
             value={{
-                sortBooksGenre,
                 deleteBook,
                 addBook,
                 delBookUser,

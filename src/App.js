@@ -4,8 +4,8 @@ import { Box } from '@mui/material';
 import { MainLoyout } from './components/MainLoyout';
 import { CardsUserProvider } from './Context/CardsUserProvider';
 import { Loading } from './UI/loading/Loading';
-import {BookUserProvider} from './Context/BookUserProvider';
 import './App.css';
+import {StateParamsProvider} from './Context/StateParamsProvider';
 
 
 export const AllCards = createContext()
@@ -18,16 +18,18 @@ function App() {
 
     return (
         <BrowserRouter>
-            <Box className='App'>
-                { (time)
-                    ?<CardsUserProvider>
-                        <BookUserProvider>
-                            <MainLoyout/>              
-                        </BookUserProvider>
-                    </CardsUserProvider>
-                    : <Loading/>
-                }
+                <Box className='App'>
+                    { (time)
+                    ?<StateParamsProvider>
+                        <CardsUserProvider>
+                            <MainLoyout/>
+                        </CardsUserProvider>
+                    </StateParamsProvider>
+                   
+                        : <Loading/>
+                    }
             </Box>
+            
         </BrowserRouter>
     );
 }

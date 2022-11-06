@@ -7,13 +7,11 @@ import { CardsUserContext } from "../../../Context/CardsUserProvider";
 import { Buttons } from "../../../UI/button/Buttons";
 import { BookLikes } from "./BookLikes";
 import "./book.css";
+import {StateParamsContext} from "../../../Context/StateParamsProvider";
 
 export const BookIcons = () => {
-    const {
-        user,
-        usersAddBook,
-        bookId
-    } = useContext(CardsUserContext);
+    const { usersAddBook, bookId} = useContext(CardsUserContext);
+    const{ user } = useContext(StateParamsContext)
     const route = useHistory();
 
     const back = () => {

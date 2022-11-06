@@ -2,8 +2,8 @@ import { React, useContext, useState} from 'react';
 import { FormGroup, Box } from '@mui/material';
 import { useHistory, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { StateParamsContext } from '../../Context/StateParamsProvider';
 import { NotificationContext} from '../../Context/NotificationProvider';
-import { CardsUserContext } from '../../Context/CardsUserProvider';
 import { Buttons } from '../../UI/button/Buttons';
 import { MyCheckBox } from '../../UI/checkbox/CheckBox';
 import { MyInput } from '../../UI/input/MyInput';
@@ -12,7 +12,7 @@ import 'react-notifications/lib/notifications.css';
 import './create.css'
 
 export const Login = () => {
-    const { users, setUser } = useContext(CardsUserContext);
+    const { users, setUser } = useContext(StateParamsContext);
     const {createNotification} = useContext(NotificationContext);
     
     const [login, setLogin] = useState('');

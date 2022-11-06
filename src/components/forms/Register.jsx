@@ -8,10 +8,12 @@ import { Buttons } from '../../UI/button/Buttons';
 import {  MyCheckBox } from '../../UI/checkbox/CheckBox';
 import { MyInput } from '../../UI/input/MyInput';
 import './create.css'
+import {StateParamsContext} from '../../Context/StateParamsProvider';
+import {auth} from '../../firebase/firebase-config';
 
 export const Register = () => {
-    const { auth, addCollection, setUser, usersCollectionRef } =
-        useContext(CardsUserContext);
+    const { addCollection,  usersCollectionRef } = useContext(CardsUserContext);
+    const { setUser} = useContext(StateParamsContext)
     const emailReg =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,2}\.[0-9]{1,3}\.[0-9]{1,2}\.[0-9]{1,2}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const passSimpleReg = /(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{6,}/g;

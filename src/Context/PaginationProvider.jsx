@@ -2,20 +2,23 @@ import {React, useState, createContext, useContext, useEffect} from 'react'
 import {collection,getDocs, query,orderBy,limit} from "firebase/firestore";
 import {CardsUserContext} from './CardsUserProvider';
 import {db} from '../firebase/firebase-config';
+import {StateParamsContext} from './StateParamsProvider';
 export const PaginationContext = createContext()
 
 export const PaginationProvider = ({children}) => {
-    const { setBooksSort, booksSort } = useContext(CardsUserContext);
+    const {setBooksSort, booksSort} = useContext(StateParamsContext)
+
     const [last, setLast] = useState({});
     const [first, setFirst] = useState({});
     const [active, setActive] = useState(true);
-    const limitBooks = 12;
     const [booksPag, setBooksPag] = useState({
         order: "title",
         sort: "asc",
         start: "",
         before: "",
     });
+    
+    const limitBooks = 12;
     const booksStartRef = query(
         collection(db, "Books"),
         orderBy(booksPag.order, booksPag.sort),

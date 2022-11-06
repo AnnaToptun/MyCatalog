@@ -6,24 +6,24 @@ import { NotificationManager } from "react-notifications";
 export const NotificationContext = createContext()
 
 export const NotificationProvider = ({ children }) => {
-  const createNotification = (type, massage, title) => {
-    switch (type) {
-      case "info":
-        NotificationManager.info(massage);
-        break;
-      case "success":
-        NotificationManager.success(massage, title);
-        break;
-      case "warning":
-        NotificationManager.warning(massage, title, 3000);
-        break;
-      case "error":
-        NotificationManager.error(massage, title, 5000, () => {
-          alert("callback");
-        });
-        break;
-    }
-  };
+    const createNotification = (type, massage, title) => {
+        switch (type) {
+        case "info":
+            NotificationManager.info(massage);
+            break;
+        case "success":
+            NotificationManager.success(massage, title);
+            break;
+        case "warning":
+            NotificationManager.warning(massage, title, 3000);
+            break;
+        case "error":
+            NotificationManager.error(massage, title, 5000, () => {
+            alert("callback");
+            });
+            break;
+        }
+    };
 
     const notificationAddBook = (card) => {
       createNotification(

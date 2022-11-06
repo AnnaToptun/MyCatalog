@@ -1,6 +1,6 @@
 import { React, useContext, useState } from 'react'
 import { Box, MenuItem } from '@mui/material'
-import { CardsUserContext } from '../../../Context/CardsUserProvider'
+import {StateParamsContext} from '../../../Context/StateParamsProvider'
 import { PaginationContext } from '../../../Context/PaginationProvider'
 import { MyInput } from '../../../UI/input/MyInput'
 import { MySelect } from '../../../UI/select/MySelect'
@@ -9,8 +9,9 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import './sorted.css'
 
 export const SortedBook = () => {
-    const {books, genres, setBooksSort}  = useContext(CardsUserContext)
     const {booksPag, setBooksPag} = useContext(PaginationContext)
+    const {books, genres, setBooksSort} = useContext(StateParamsContext)
+
     const [genre, setGenre] = useState('Оберіть жанр')
     const [search, setSearch] = useState('')
     const [sorts, setSort] = useState('Сортувати за...')

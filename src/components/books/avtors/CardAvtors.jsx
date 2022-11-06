@@ -7,11 +7,11 @@ import EditAvtor from "./EditAvtor";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "./avtors.css";
 import {AllAvtorBooks} from "./AllAvtorBooks";
+import {StateParamsContext} from "../../../Context/StateParamsProvider";
 
 export const CardAvtors = () => {
-    const { userCurrent, books, user, setBookId, setCommentIdBooks, avtorId } =
-    useContext(CardsUserContext);
-
+    const {setBookId, setCommentIdBooks, avtorId } = useContext(CardsUserContext);
+    const {books, user, userCurrent } = useContext(StateParamsContext)
     const route = useHistory();
 
     const avtorBooksId = avtorId.booksAvtor;

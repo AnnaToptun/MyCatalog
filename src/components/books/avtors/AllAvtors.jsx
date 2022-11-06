@@ -4,10 +4,11 @@ import { Box, Card } from "@material-ui/core";
 import { CardsUserContext } from "../../../Context/CardsUserProvider";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import "./avtors.css";
+import {StateParamsContext} from "../../../Context/StateParamsProvider";
 
 export const AllAvtors = () =>{
-    const { avtors, setAvtorId } = useContext(CardsUserContext);
-
+    const {  setAvtorId } = useContext(CardsUserContext);
+    const {avtors} = useContext(StateParamsContext)
     const route = useHistory();
 
     const detailsAvtor = (card) => {

@@ -3,4 +3,17 @@
     justify-content: center;
     flex-wrap: wrap;
 }
-
+.sorted-cards{
+    padding-left: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+.sorted-nocards {
+    padding-top: 50px;
+    text-align: center;
+    font-family: 'Oleo Script Swash Caps', cursive;
+    font-size: 50px;
+    font-weight: bold;
+    text-shadow: 4px 4px 0 #240376;
+    color: #e1e1e1;
+}

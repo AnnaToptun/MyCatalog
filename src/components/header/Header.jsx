@@ -2,6 +2,7 @@ import { React, useContext } from 'react'
 import { BrowserRouter as Router, Link} from 'react-router-dom';
 import { Box, Container } from '@mui/material';
 import { CardsUserContext } from '../../Context/CardsUserProvider';
+import { StateParamsContext } from '../../Context/StateParamsProvider';
 import { signOut } from 'firebase/auth'
 import { useHistory } from 'react-router-dom';
 import { auth } from '../../firebase/firebase-config';
@@ -9,7 +10,9 @@ import './Header.css'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 export const Header = ({children}) => {
-    const {user,setUser, userCurrent, setUserId} = useContext(CardsUserContext)
+    const { setUserId} = useContext(CardsUserContext)
+    const { user, setUser, userCurrent} = useContext(StateParamsContext)
+    
     const route = useHistory()
     const logOut = async () =>{
         setUser(false)

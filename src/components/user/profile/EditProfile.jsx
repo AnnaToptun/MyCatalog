@@ -5,15 +5,11 @@ import { MyModal } from "../../../UI/modal/myModal";
 import { Buttons } from "../../../UI/button/Buttons";
 import BuildCircleIcon from "@mui/icons-material/BuildCircle";
 import "./profile.css";
+import {StateParamsContext} from "../../../Context/StateParamsProvider";
 
 export const EditProfile = () => {
-    const {
-      userCurrent,
-      editCardUser,
-      setUserCurrent,
-      userId,
-      setUserId,
-    } = useContext(CardsUserContext);
+    const { userId, setUserId, updateArrays } = useContext(CardsUserContext);
+    const { userCurrent, setUserCurrent } = useContext(StateParamsContext)
    
     const [newFieldUser, setNewFieldUser] = useState({
         fistName: userCurrent.fistName,
@@ -28,7 +24,7 @@ export const EditProfile = () => {
         const id = userId.id;
         setUserId({ ...userId, ...newFieldUser });
         setUserCurrent({ ...userCurrent, ...newFieldUser });
-        editCardUser(id, "Users", newFieldUser);
+        updateArrays("Users", userCurrent.id, { ...newFieldUser });
     };
 
     const nameHandler = (value) => {

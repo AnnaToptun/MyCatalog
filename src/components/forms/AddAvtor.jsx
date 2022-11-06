@@ -7,10 +7,11 @@ import { TextArea } from '../../UI/textArea/TextArea'
 import {NotificationContext} from '../../Context/NotificationProvider';
 import { CardsUserContext } from '../../Context/CardsUserProvider'
 import './create.css'
+import {StateParamsContext} from '../../Context/StateParamsProvider'
 
 export const AddAvtor = () => {
-    const {addCollection, setAvtors, avtors,avtorsCollectionRef} = useContext(CardsUserContext);
-    
+    const {addCollection,  avtorsCollectionRef} = useContext(CardsUserContext);
+    const {setAvtors, avtors,} = useContext(StateParamsContext)
     const { createNotification } = useContext(NotificationContext);
     const [avtor, setAvtor] = useState({
         avtor: '',

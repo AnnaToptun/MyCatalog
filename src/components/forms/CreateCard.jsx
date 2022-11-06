@@ -1,8 +1,8 @@
 import { Box, FormGroup, MenuItem } from '@mui/material'
 import { React,  useContext, useState } from 'react'
-import { NotificationContainer } from 'react-notifications';
 import { CardsUserContext } from '../../Context/CardsUserProvider'
-import {NotificationContext} from '../../Context/NotificationProvider';
+import { NotificationContext } from '../../Context/NotificationProvider';
+import {StateParamsContext} from '../../Context/StateParamsProvider';
 import { Buttons } from '../../UI/button/Buttons'
 import { MyInput } from '../../UI/input/MyInput'
 import { MySelect } from '../../UI/select/MySelect' 
@@ -10,9 +10,9 @@ import { TextArea } from '../../UI/textArea/TextArea'
 import './create.css'
 
 export function CreateCard () {
-    const {
-      genres,avtors,setBooksSort,booksSort,addCollection,booksCollectionRef} = useContext(CardsUserContext);
-    const {createNotification} = useContext(NotificationContext)
+    const { addCollection, booksCollectionRef} = useContext(CardsUserContext);
+    const { createNotification } = useContext(NotificationContext)
+    const { avtors, genres, setBooksSort, booksSort } = useContext(StateParamsContext)
     const [cardBook, setCardBook] = useState({
         title: '',
         avtor: '',

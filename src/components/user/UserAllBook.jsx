@@ -6,23 +6,21 @@ import {BookUserContext} from '../../Context/BookUserProvider'
 import './user.css'
 
 export function UserAllBook() {
+    const {usersBooks} = useContext(BookUserContext);
     
-    const { usersBooks } = useContext(BookUserContext);
-  return (
-    <Container>
-      {usersBooks.length ? (
-        <Box className="user" p={0} m={0}>
-          {usersBooks.map((card) => (
-            <Box key={card.id} my={2} mx={2}>
-              <CardBook
-                card={card}
-              />
-            </Box>
-          ))}
-        </Box>
-      ) : (
-        <p>Ще не додано жодної книги</p>
-      )}
-    </Container>
-  );
+    return (
+        <Container>
+            {usersBooks.length ? (
+                <Box className="user" p={0} m={0}>
+                {usersBooks.map((card) => (
+                    <Box key={card.id} my={2} mx={2}>
+                    <CardBook card={card}/>
+                    </Box>
+                ))}
+                </Box>
+            ) : (
+                <p сlassName="user-nocards">Ще не додано жодної книги</p>
+            )}
+        </Container>
+    );
 }

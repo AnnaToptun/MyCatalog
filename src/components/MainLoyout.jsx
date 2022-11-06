@@ -5,7 +5,7 @@ import { AsideUser } from './user/userHome/AsideUser'
 import { Header } from './header/Header'
 import { Login } from './forms/Login'
 import { Register } from './forms/Register'
-import { CardsUserContext } from '../Context/CardsUserProvider'
+import { StateParamsContext } from '../Context/StateParamsProvider'
 import { CardAvtors } from './books/avtors/CardAvtors'
 import { AddAvtor } from './forms/AddAvtor'
 import { ResetPassword } from './forms/ResetPassword'
@@ -14,7 +14,7 @@ import { Create } from './forms/blockform/Create'
 import { Profile } from './user/profile/Profile'
 
 export function MainLoyout () {
-  const {user} = useContext(CardsUserContext)
+  const {user} = useContext(StateParamsContext)
  
   return (
      

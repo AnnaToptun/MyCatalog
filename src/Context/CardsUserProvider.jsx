@@ -1,22 +1,25 @@
-import { React, createContext, useState, useEffect } from "react";
+import { React, createContext, useState, useEffect, useContext } from "react";
 import { db, auth } from '../firebase/firebase-config'
-import { collection, addDoc, getDocs, updateDoc, doc, deleteDoc,} from 'firebase/firestore'
+import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useHistory } from 'react-router-dom'
-import {NotificationProvider} from "./NotificationProvider";
-import {FirebaseProvider} from "./FirebaseProvider";
+import { NotificationProvider } from "./NotificationProvider";
+import { BookUserProvider } from "./BookUserProvider";
+import { StateParamsContext } from "./StateParamsProvider";
 
 
 export const CardsUserContext = createContext({})
 
 export const CardsUserProvider = ({children}) => {
-    const [books, setBooks] = useState([])
-    const [avtors, setAvtors] = useState([])
-    const [users, setUsers] = useState([])
-    const [genres, setGenres] = useState([])
-    const [userCurrent, setUserCurrent] = useState({})
+    const {setBooks, setUsers, setUser, setGenres, setUserCurrent, setAvtors} = useContext(StateParamsContext)
     const [userIdBooks, setUserIdBooks] = useState([])
-    const [user, setUser] = useState(false)
+    const [userId, setUserId] = useState({})
+    const [bookId, setBookId] = useState({})
+    const [usersAddBook, setUsersAddBook] = useState([]);  
+    const [avtorId, setAvtorId] = useState({})
+    const [commentIdBooks, setCommentIdBooks] = useState([])
+   
+    const route = useHistory();
 
     const usersCollectionRef = collection(db, 'Users')
     const genresCollectionRef = collection(db, 'Genre')
@@ -44,91 +47,28 @@ export const CardsUserProvider = ({children}) => {
             }
         })
     }
+
     const getAvtors = async () => {
         const dataAvtors = await getDocs(avtorsCollectionRef)
         const allAvtors = dataAvtors.docs.map(doc => ({ ...doc.data(), id: doc.id }))
         setAvtors(allAvtors.sort((prev, next) =>  prev.avtor < next.avtor &&  -1))
     }
+
     const getGenres = async () => {
         const dataGenres = await getDocs(genresCollectionRef);
         const allGenres = dataGenres.docs.map(doc => ({ ...doc.data(), id: doc.id }))
         setGenres(allGenres.sort((prev, next) =>  prev.genre < next.genre &&  -1))
     }
 
-  
-    const [userId, setUserId] = useState({})
-    const [commentIdBooks, setCommentIdBooks] = useState([])
-    const [bookId, setBookId] = useState({})
-    const [usersAddBook, setUsersAddBook] = useState([]);  
-    const [booksSort, setBooksSort] = useState([])
-    const [avtorId, setAvtorId] = useState({})
-    const route = useHistory();
-    
-   
-  
     const addCollection = async (collections, field) => {
         await addDoc(collections, field);
     }
  
     const updateArrays = async (collections, id, newField) => {
-      const bookDoc = doc(db, collections, id);
-      await updateDoc(bookDoc, newField);
+        const bookDoc = doc(db, collections, id);
+        console.log(newField)
+        await updateDoc(bookDoc, newField);
     };
-  
-    const addBookUser = async (id, userBooks, newBook) => {
-        const userDoc = doc(db, 'Users', id)
-        const newField = {userBooks: [...userBooks, newBook]}
-        setUserIdBooks([...userIdBooks, newBook]);
-        await updateDoc(userDoc, newField)
-        getUsers()
-    }
-  
-    const deleteBookUser = async (id, userBooks, delBooks) => {
-        const userDoc = doc(db, "Users", id);
-        const newArray = userBooks.filter((book) => book !== delBooks);
-        const newField = { userBooks: newArray };
-        await updateDoc(userDoc, newField);
-        setUserIdBooks(newArray);
-    };
-
-  const addBookComment = async (id, comments, newComment) => {
-    const userDoc = doc(db, 'Books', id)
-    const newField = { comments: [...comments, newComment] }
-    await updateDoc(userDoc, newField)
-    setCommentIdBooks([...commentIdBooks, newComment])
-    getBookCards()
-  }
-  const addBookIdUser = async (id, addUsers, newUser) => {
-    const userDoc = doc(db, 'Books', id)
-    const newField = { addUsers: [...addUsers, newUser] }
-    await updateDoc(userDoc, newField)
-    getBookCards()
-  }
-  const addBooksAvtor = async (id, booksAvtor, newBook) => {
-    const userDoc = doc(db, 'Avtors', id)
-    const newField = { booksAvtor: [...booksAvtor, newBook] }
-    await updateDoc(userDoc, newField)
-    getAvtors()
-    }
-    
-  const editCardUser = async (id, collection, updateField) => {
-    const userDoc = doc(db, collection, id)
-    const newField = { ...updateField }
-    await updateDoc(userDoc, newField)
-    }
-    
-  const updateListUsers = async (id, updateList) => {
-    const bookDoc = doc(db, 'Books', id)
-    const newField = { addUsers: updateList }
-    await updateDoc(bookDoc, newField)
-    getBookCards()
-  }
-  
-    const deleteBookOrUser = async (id,collection) =>{
-        const userDoc = doc(db, collection, id)
-        const deleteBook = await deleteDoc(userDoc)
-        console.log(typeof deleteBook)
-    }
     
     const monitorAuthState = async () => {
         onAuthStateChanged(auth, user => {
@@ -140,7 +80,7 @@ export const CardsUserProvider = ({children}) => {
                 route.push('/quest/login')
                 setUser(false);
             }
-        })
+        }) 
     }
 
     useEffect(() => {
@@ -152,54 +92,34 @@ export const CardsUserProvider = ({children}) => {
     }, [usersAddBook]);
     
     return (
-    <CardsUserContext.Provider
-      value={{
-        books,
-        setBooks,
-        users,
-        user,
-        setUser,
-        genres,
-        setGenres,
-        userCurrent,
-        setUserCurrent,
-        userIdBooks,
-        setUserIdBooks,
-        commentIdBooks,
-        setCommentIdBooks,
-        bookId,
-        setBookId,
-        booksSort,
-        setBooksSort,
-        avtors,
-        setAvtors,
-        userId,
-        setUserId,
-        avtorId,
-        setAvtorId,
-        usersAddBook,
-        setUsersAddBook,
-        addBookComment,
-        addBookUser,
-        addBooksAvtor,
-        deleteBookUser,
-        editCardUser,
-        deleteBookOrUser,
-        updateListUsers,
-        addBookIdUser,
+      <CardsUserContext.Provider
+        value={{
+          userIdBooks,
+          setUserIdBooks,
+          commentIdBooks,
+          setCommentIdBooks,
+          bookId,
+          setBookId,
+          userId,
+          setUserId,
+          avtorId,
+          setAvtorId,
+          usersAddBook,
+          setUsersAddBook,
 
-        addCollection,
-        booksCollectionRef,
-        genresCollectionRef,
-        avtorsCollectionRef,
-        usersCollectionRef,
-        updateArrays,
-      }}
-        >
-        <FirebaseProvider>
-                
-        <NotificationProvider>{children}</NotificationProvider>
-    </FirebaseProvider>
-    </CardsUserContext.Provider>
-  );
+          addCollection,
+          booksCollectionRef,
+          genresCollectionRef,
+          avtorsCollectionRef,
+          usersCollectionRef,
+          updateArrays,
+        }}
+      >
+           <NotificationProvider>
+                <BookUserProvider>
+                    {children}
+                </BookUserProvider>
+            </NotificationProvider>
+      </CardsUserContext.Provider>
+    );
 };

@@ -4,6 +4,7 @@ import { useState, useContext } from 'react';
 import { Tabs, Box } from '@mui/material'
 import { BookUserContext } from '../../../Context/BookUserProvider';
 import { CardsUserContext } from '../../../Context/CardsUserProvider'
+import {StateParamsContext} from '../../../Context/StateParamsProvider';
 import { SortedArray } from '../../books/sorted/SortedArray'
 import { AllCard } from '../../books/AllCard';
 import { AllAvtors } from '../../books/avtors/AllAvtors';
@@ -14,9 +15,9 @@ import './userHome.css'
 
 
 export const AsideUser = () => {
-    const { avtors, genres, books, userIdBooks } = useContext(CardsUserContext);
-
-    const {  usersBooks } = useContext(BookUserContext);
+    const { userIdBooks } = useContext(CardsUserContext);
+    const { avtors, genres, books } = useContext(StateParamsContext)
+    const { usersBooks } = useContext(BookUserContext);
     
     const [value, setValue] = React.useState(0)
 

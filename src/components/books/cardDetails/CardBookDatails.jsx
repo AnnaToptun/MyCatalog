@@ -5,15 +5,12 @@ import { Comments } from '../comment/Comments'
 import {CardsUserContext} from '../../../Context/CardsUserProvider'
 import bookIMG from '../../../img/book.jpg'
 import './book.css'
-import {BookUserContext} from '../../../Context/BookUserProvider'
 import {DetailsBook} from './DetailsBook'
+import {StateParamsContext} from '../../../Context/StateParamsProvider'
 
 export const CardBookDatails = () => {
-    const {
-      user,
-      bookId,
-    } = useContext(CardsUserContext); 
-    
+    const { bookId} = useContext(CardsUserContext); 
+    const { user } = useContext(StateParamsContext)
    
     return (
         <Container p={10} my={4}>
@@ -37,6 +34,5 @@ export const CardBookDatails = () => {
                 }
             </Box>
         </Container>
-    
     )
 }

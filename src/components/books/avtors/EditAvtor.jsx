@@ -5,10 +5,11 @@ import { TextArea } from "../../../UI/textArea/TextArea";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { CardsUserContext } from "../../../Context/CardsUserProvider";
 import "./avtors.css";
+import {StateParamsContext} from "../../../Context/StateParamsProvider";
 
 export const EditAvtor = () => {
-    const {avtors, setAvtors, editCardUser, avtorId, setAvtorId} = useContext(CardsUserContext);
-    
+    const { avtorId,setAvtorId, updateArrays } = useContext(CardsUserContext);
+    const { avtors, setAvtors} = useContext(StateParamsContext)
     const [newFieldAvtor, setNewFieldAvtor] = useState({
         discribe: avtorId.discribe,
         img: avtorId.img,
@@ -23,7 +24,6 @@ export const EditAvtor = () => {
     }
 
     const updateAvtor = () => {
-        const id = avtorId.id;
         setAvtorId({ ...avtorId, ...newFieldAvtor });
         setAvtors(
             avtors.map((avtor) => {
@@ -34,7 +34,7 @@ export const EditAvtor = () => {
                 }
             })
         );
-        editCardUser(id, "Avtors", newFieldAvtor);
+        updateArrays("Avtors", avtorId.id, { ...newFieldAvtor });
     };
     return (
         <MyModal title={<EditOutlinedIcon className="avtor-icons" />}>
